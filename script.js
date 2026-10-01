@@ -53,7 +53,7 @@ const canvas =
         // Step 5: Improvements
         //
         // ==================================
-        function movesnake() {
+        function matoliike() {
             const head = { 
                 x: snake[0].x + direction.x,
                 y: snake[0].y + direction.y 
@@ -63,10 +63,25 @@ const canvas =
                 head.y < 0 || 
                 head.y >= tileCount
             ){
-                clearInterval(gameTimer);
+                clearInterval(peliaika);
                 alert("Game Over! Score: " + score);
+                resetti();
+                peliaika = setInterval(matoliike, 200);
                 return;
             }
+            if(direction.x !== 0 || direction.y !== 0) {
+                for (let i=0; i<snake.length-1; i++){
+                    if(head.x === snake[i].x && head.y === snake[i].y) {
+                        clearInterval(peliaika);
+                        alert("Game Over! Score: " + score);
+                        resetti();
+                        peliaika = setInterval(matoliike, 200);
+                        return;
+                    }
+                }
+            }
+
+
             snake.unshift(head);
 
             if(head.x === food.x && head.y === food.y) {
@@ -98,5 +113,18 @@ const canvas =
             }
         });
 
-        const gameTimer = setInterval(movesnake, 200);
+        function resetti() {
+            snake = [
+                { x: 10, y: 10 },
+                { x: 9, y: 10 },
+                { x: 8, y: 10 }
+            ];
+            direction = { x: 0, y: 0 };
+            food = { x: 15, y: 15 };
+            score = 0;
+            drawGame();
+        }
+
+
+        let peliaika = setInterval(matoliike, 200);
 

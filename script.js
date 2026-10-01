@@ -13,7 +13,7 @@ const canvas =
         let direction = { x: 0, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
-
+        let liikevali= 200;
         // ===== DRAWING =====
         const drawGame = () => {
             ctx.clearRect(0, 0,
@@ -66,7 +66,7 @@ const canvas =
                 clearInterval(peliaika);
                 alert("Game Over! Score: " + score);
                 resetti();
-                peliaika = setInterval(matoliike, 200);
+                peliaika = setInterval(matoliike, liikevali);
                 return;
             }
             if(direction.x !== 0 || direction.y !== 0) {
@@ -75,7 +75,7 @@ const canvas =
                         clearInterval(peliaika);
                         alert("Game Over! Score: " + score);
                         resetti();
-                        peliaika = setInterval(matoliike, 200);
+                        peliaika = setInterval(matoliike, liikevali);
                         return;
                     }
                 }
@@ -86,10 +86,20 @@ const canvas =
 
             if(head.x === food.x && head.y === food.y) {
                 score++;
-                food = {
-                    x: Math.floor(Math.random() * tileCount), 
-                    y: Math.floor(Math.random() * tileCount) 
-                };
+                do{
+                    food = {
+                        x: Math.floor(Math.random() * tileCount),
+                        y: Math.floor(Math.random() * tileCount)
+                    };
+                } while(
+                    snake.some(segment => 
+                        segment.x === food.x && 
+                        segment.y === food.y
+                    )
+                );
+                liikevali= Math.max(50, liikevali-5);
+                clearInterval(peliaika);
+                peliaika = setInterval(matoliike, liikevali);
             } else{
                 snake.pop();
             }
@@ -122,9 +132,8 @@ const canvas =
             direction = { x: 0, y: 0 };
             food = { x: 15, y: 15 };
             score = 0;
+            liikevali= 200;
             drawGame();
         }
-
-
-        let peliaika = setInterval(matoliike, 200);
+        let peliaika = setInterval(matoliike, liikevali);
 

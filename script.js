@@ -1,5 +1,5 @@
-const canvas =
-            document.getElementById("gameCanvas");
+        const canvas =document.getElementById("gameCanvas");
+        const info= document.getElementById("info");
         const ctx = canvas.getContext("2d");
         const gridSize = 20;
         const tileCount = canvas.width / gridSize;
@@ -13,6 +13,7 @@ const canvas =
         let direction = { x: 0, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
+        info.textContent = "Pisteet: " + score;
         let liikevali= 200;
         // ===== DRAWING =====
         const drawGame = () => {
@@ -86,6 +87,7 @@ const canvas =
 
             if(head.x === food.x && head.y === food.y) {
                 score++;
+                info.textContent = "Pisteet: " + score;
                 do{
                     food = {
                         x: Math.floor(Math.random() * tileCount),
@@ -132,8 +134,11 @@ const canvas =
             direction = { x: 0, y: 0 };
             food = { x: 15, y: 15 };
             score = 0;
+            info.textContent = "Pisteet: " + score;
             liikevali= 200;
             drawGame();
         }
         let peliaika = setInterval(matoliike, liikevali);
+
+
 

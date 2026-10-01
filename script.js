@@ -17,6 +17,7 @@
         info.textContent = "Pisteet: " + score;
         document.getElementById("ennatus").textContent = ennatus;
         let liikevali= 200;
+        let tauko= false;
         // ===== DRAWING =====
         const drawGame = () => {
             ctx.clearRect(0, 0,
@@ -57,6 +58,7 @@
         //
         // ==================================
         function matoliike() {
+            if(tauko) return;
             const head = { 
                 x: snake[0].x + direction.x,
                 y: snake[0].y + direction.y 
@@ -118,6 +120,10 @@
 
 
         document.addEventListener("keydown", (event) => {
+            if (event.code === "Space"){
+                tauko = !tauko;
+            }
+
             if(event.key === "ArrowUp" && direction.y === 0) {
                 direction = { x: 0, y: -1 };
             }

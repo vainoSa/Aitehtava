@@ -3,6 +3,9 @@
         const ctx = canvas.getContext("2d");
         const gridSize = 20;
         const tileCount = canvas.width / gridSize;
+        const aloitusruutu = document.getElementById("aloitusruutu");
+        const pelialue = document.getElementById("pelialue");
+        const startButton = document.getElementById("startButton");
 
         // ===== INITIAL STATE =====
         let snake = [
@@ -57,8 +60,14 @@
         // Step 5: Improvements
         //
         // ==================================
+        startButton.addEventListener("click", () => {
+            aloitusruutu.hidden = true;
+            pelialue.hidden = false;
+            peliaika = setInterval(matoliike, liikevali);
+        });
+
         function matoliike() {
-            if(tauko) return;
+            if(tauko || (direction.x===0 && direction.y===0)) return;
             const head = { 
                 x: snake[0].x + direction.x,
                 y: snake[0].y + direction.y 
@@ -151,7 +160,7 @@
             liikevali= 200;
             drawGame();
         }
-        let peliaika = setInterval(matoliike, liikevali);
+        let peliaika;
 
 
 

@@ -20,7 +20,7 @@
         let food = { x: 15, y: 15 };
         let score = 0;
         let ennatus= Number(localStorage.getItem("ennatus")) || 0;
-        info.textContent = "Pisteet: " + score;
+        info.textContent = score;
         document.getElementById("ennatus").textContent = ennatus;
         let liikevali= 200;
         let tauko= false;
@@ -102,7 +102,7 @@
                     localStorage.setItem("ennatus", ennatus);
                     document.getElementById("ennatus").textContent = ennatus;
                 }
-                info.textContent = "Pisteet: " + score;
+                info.textContent = score;
                 do{
                     food = {
                         x: Math.floor(Math.random() * tileCount),
@@ -146,7 +146,7 @@
 
         function naytaGameOver(){
             clearInterval(peliaika);
-            finalScore.textContent = "Pisteet: " + score;
+            finalScore.textContent =score;
             pelialue.hidden = true;
             gameOver.hidden = false;
         }
@@ -160,7 +160,7 @@
             direction = { x: 0, y: 0 };
             food = { x: 15, y: 15 };
             score = 0;
-            info.textContent = "Pisteet: " + score;
+            info.textContent =score;
             liikevali= 200;
             drawGame();
         }

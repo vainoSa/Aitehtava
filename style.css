@@ -1,0 +1,16 @@
+canvas {
+    border: 4px solid rgb(12, 70, 0);
+    background-color: rgb(186, 255, 172);
+    border-radius: 10px;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #20352a;
+    background-color: #a6ff00;
+}
+
+#info, #ennatus, #finalScore {
+    font-weight: bold;
+}

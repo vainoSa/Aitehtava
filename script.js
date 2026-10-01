@@ -6,6 +6,9 @@
         const aloitusruutu = document.getElementById("aloitusruutu");
         const pelialue = document.getElementById("pelialue");
         const startButton = document.getElementById("startButton");
+        const gameOver = document.getElementById("gameOver");
+        const finalScore = document.getElementById("finalScore");
+        const restartButton = document.getElementById("restartButton");
 
         // ===== INITIAL STATE =====
         let snake = [
@@ -77,19 +80,13 @@
                 head.y < 0 || 
                 head.y >= tileCount
             ){
-                clearInterval(peliaika);
-                alert("Game Over! Score: " + score);
-                resetti();
-                peliaika = setInterval(matoliike, liikevali);
+                naytaGameOver();
                 return;
             }
             if(direction.x !== 0 || direction.y !== 0) {
                 for (let i=0; i<snake.length-1; i++){
                     if(head.x === snake[i].x && head.y === snake[i].y) {
-                        clearInterval(peliaika);
-                        alert("Game Over! Score: " + score);
-                        resetti();
-                        peliaika = setInterval(matoliike, liikevali);
+                        naytaGameOver();
                         return;
                     }
                 }
@@ -147,6 +144,13 @@
             }
         });
 
+        function naytaGameOver(){
+            clearInterval(peliaika);
+            finalScore.textContent = "Pisteet: " + score;
+            pelialue.hidden = true;
+            gameOver.hidden = false;
+        }
+
         function resetti() {
             snake = [
                 { x: 10, y: 10 },
@@ -160,6 +164,13 @@
             liikevali= 200;
             drawGame();
         }
+        restartButton.addEventListener("click", () => {
+            gameOver.hidden = true;
+            pelialue.hidden = false;
+            resetti();
+            peliaika = setInterval(matoliike, liikevali);
+        });
+
         let peliaika;
 
 

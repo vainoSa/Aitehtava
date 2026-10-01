@@ -13,7 +13,9 @@
         let direction = { x: 0, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
+        let ennatus= Number(localStorage.getItem("ennatus")) || 0;
         info.textContent = "Pisteet: " + score;
+        document.getElementById("ennatus").textContent = ennatus;
         let liikevali= 200;
         // ===== DRAWING =====
         const drawGame = () => {
@@ -87,6 +89,11 @@
 
             if(head.x === food.x && head.y === food.y) {
                 score++;
+                if(score > ennatus){
+                    ennatus= score;
+                    localStorage.setItem("ennatus", ennatus);
+                    document.getElementById("ennatus").textContent = ennatus;
+                }
                 info.textContent = "Pisteet: " + score;
                 do{
                     food = {
